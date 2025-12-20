@@ -1,0 +1,41 @@
+* {
+  margin: auto;
+  box-sizing: border-box;
+}
+.C-form{
+    width: 450px;
+    height: 400px;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(14, 192, 133);
+    border-radius: 20px;
+}
+.client-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.client-form input{
+    width: 200px;
+    height: 40px;
+    border: 2px solid white;
+    border-radius: 5px;
+}
+.client-header{
+    font-size: x-large
+}
+.btn{
+    width: 80px;
+    height: 35px;
+    font-weight: 600;
+    border-radius: 5px;
+    background-color: rgba(6, 6, 6, 0.901);
+    color: white;
+    border: 1px solid white;
+    font-size: 15px;
+    padding: 5px;
+}
+table{
+    margin-top: 20px;
+}
