@@ -6,10 +6,12 @@ export default function ClientForm() {
   const [formData, setformData] = useState({
     clientID: "",
     clientName: "",
-    clientAge: "",
+    clientAge: "",  
     clientAddress: "",
   });
   const [clients, setclients] = useState([]);
+  const [editingIndex, setEditingIndex] = useState(null);
+
 
   const handlechange = (e) => {
     console.log(e.target.name, e.target.value);
@@ -20,32 +22,71 @@ export default function ClientForm() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log(e.target);
-    console.log("Form Submitted", formData);
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+    
+  //   // console.log(e.target);
+  //   console.log("Form Submitted", formData);
+  //   setclients([...clients, formData]);
+
+  //     setformData({
+  //     clientID: "",
+  //     clientName: "",
+  //     clientAge: "",
+  //     clientAddress: "",
+  //   });
+  // };
+
+  const handleEdit = (index) => {
+  setformData(clients[index]);   
+  setEditingIndex(index);        
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  if (editingIndex === null) {
+    // 👉 NEW CLIENT
     setclients([...clients, formData]);
-
-    setformData({
-      clientID: "",
-      clientName: "",
-      clientAge: "",
-      clientAddress: "",
-    });
-  };
-
-  const handleRemove = (indexToRemove) => {
-  
-    const updatedClient = [];
-
-    for (let i = 0; i < clients.length; i++) {
-      if (i !== indexToRemove) {
-        updatedClient.push(clients[i]);
+  } else {
+    // 👉 EDIT CLIENT
+    const updatedClients = clients.map((client, index) => {
+      if (index === editingIndex) {
+        return formData;   // edited data
       }
-    }
-    setclients(updatedClient);
-  };
+      return client;
+    });
+    setclients(updatedClients);
+    setEditingIndex(null);
+  }
+
+  setformData({
+    clientID: "",
+    clientName: "",
+    clientAge: "",
+    clientAddress: "",
+  });
+};
+
+
+  // const handleRemove = (indexToRemove) => {
+  
+  //   const updatedClient = [];
+
+  //   for (let i = 0; i < clients.length; i++) {
+  //     if (i !== indexToRemove) {
+  //       updatedClient.push(clients[i]);
+  //     }
+  //   }
+  //   setclients(updatedClient);
+  // };
  
+  const handleRemove =(indexToRemove) => {
+    const updatedClient = clients.filter((client, index) => {
+      return index !== indexToRemove;
+    });
+    setclients(updatedClient)
+  }
 
   return (
     <>
@@ -108,7 +149,7 @@ export default function ClientForm() {
           </button>
         </form>
       </div>
-      <ClientChild newClient={clients} removeClient={handleRemove} />
+      <ClientChild newClient={clients} removeClient={handleRemove} editClient ={handleEdit} />
     </>
   );
 }
