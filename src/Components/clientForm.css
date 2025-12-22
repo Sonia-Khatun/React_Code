@@ -39,3 +39,9 @@
 table{
     margin-top: 20px;
 }
+.child-text{
+    font-size: x-large;
+    font-weight: 600;
+    padding-left: 700px;
+    padding-top: 50px;
+}

@@ -12,10 +12,11 @@ export default function ClientForm() {
   const [clients, setclients] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
 
+  const [error, setError] = useState("")
 
   const handlechange = (e) => {
-    console.log(e.target.name, e.target.value);
-
+    // console.log(e.target.name, e.target.value);
+    
     setformData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -45,20 +46,46 @@ export default function ClientForm() {
 const handleSubmit = (e) => {
   e.preventDefault();
 
+ 
+
+  const regex = /^[A-Za-z\s]*$/;
+
+  if(!regex.test(formData.clientName)){
+    setError("Name should contain Character");
+    return;
+  }
+  const reg = /[0-9]/;
+  
+  if(!reg.test(formData.clientAge)){
+    setError("Age should contain digit");
+    return;
+  }
+
+   const duplicateID = clients.find((client) => 
+    client.clientID === formData.clientID
+  )
+
+  if(duplicateID){
+    setError("ClientID already exist");
+    return;
+  }
+
   if (editingIndex === null) {
-    // 👉 NEW CLIENT
+    // New Client
     setclients([...clients, formData]);
   } else {
-    // 👉 EDIT CLIENT
+    // Edit client
     const updatedClients = clients.map((client, index) => {
       if (index === editingIndex) {
-        return formData;   // edited data
+        return formData;   
       }
       return client;
     });
     setclients(updatedClients);
     setEditingIndex(null);
   }
+
+
 
   setformData({
     clientID: "",
@@ -82,7 +109,7 @@ const handleSubmit = (e) => {
   // };
  
   const handleRemove =(indexToRemove) => {
-    const updatedClient = clients.filter((client, index) => {
+    const updatedClient = clients.filter((_, index) => {
       return index !== indexToRemove;
     });
     setclients(updatedClient)
@@ -144,6 +171,7 @@ const handleSubmit = (e) => {
               onChange={handlechange}
             />
           </div>
+          {error && <p style={{color: "red", fontWeight: 600}}>{error}</p>}
           <button className="btn" type="submit">
             Submit
           </button>
