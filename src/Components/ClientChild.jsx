@@ -8,7 +8,7 @@ export default function ClientChild(props) {
   return clientDet.length === 0 ? (
     <p className='child-text'>No Data Available</p>
   ) :  (
-    <table border="1" cellPadding="10">
+    <table border="1" cellPadding="10"> 
     <thead>
       <tr>
         <th>Client_ID</th>
