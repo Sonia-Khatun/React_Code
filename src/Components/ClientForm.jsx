@@ -6,69 +6,55 @@ export default function ClientForm() {
   const [formData, setformData] = useState({
     clientID: "",
     clientName: "",
-    clientAge: "",  
+    clientAge: "",   
     clientAddress: "",
   });
   const [clients, setclients] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
 
-  const [error, setError] = useState("")
+  const [errors, setErrors] = useState({})
 
   const handlechange = (e) => {
     // console.log(e.target.name, e.target.value);
-    
+  const {name, value} = e.target;
+  
     setformData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
-  };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
+    let newError = { ...errors };
     
-  //   // console.log(e.target);
-  //   console.log("Form Submitted", formData);
-  //   setclients([...clients, formData]);
+    
 
-  //     setformData({
-  //     clientID: "",
-  //     clientName: "",
-  //     clientAge: "",
-  //     clientAddress: "",
-  //   });
-  // };
+    if(name === "clientName"){
+    const regex = /^[A-Za-z\s]*$/;
+    if(!regex.test(value)){
+      newError.clientName = "Name should contain Character"
+    }else{
+      delete newError.clientName
+    }
+   } 
+ 
+  
+    if(name === "clientAge"){
+     if(!value){
+        delete newError.clientAge;
+    }
+    else if(!/^\d+$/.test(value)){
+      newError.clientAge = "Age should contain digits Only"
+    }
+    else {
+      delete newError.clientAge
+    }
+  }
 
-  const handleEdit = (index) => {
-  setformData(clients[index]);   
-  setEditingIndex(index);        
+  setErrors(newError);
 };
 
-const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
   e.preventDefault();
 
- 
-
-  const regex = /^[A-Za-z\s]*$/;
-
-  if(!regex.test(formData.clientName)){
-    setError("Name should contain Character");
-    return;
-  }
-  const reg = /[0-9]/;
-  
-  if(!reg.test(formData.clientAge)){
-    setError("Age should contain digit");
-    return;
-  }
-
-   const duplicateID = clients.find((client) => 
-    client.clientID === formData.clientID
-  )
-
-  if(duplicateID){
-    setError("ClientID already exist");
-    return;
-  }
 
   if (editingIndex === null) {
     // New Client
@@ -95,18 +81,6 @@ const handleSubmit = (e) => {
   });
 };
 
-
-  // const handleRemove = (indexToRemove) => {
-  
-  //   const updatedClient = [];
-
-  //   for (let i = 0; i < clients.length; i++) {
-  //     if (i !== indexToRemove) {
-  //       updatedClient.push(clients[i]);
-  //     }
-  //   }
-  //   setclients(updatedClient);
-  // };
  
   const handleRemove =(indexToRemove) => {
     const updatedClient = clients.filter((_, index) => {
@@ -114,6 +88,10 @@ const handleSubmit = (e) => {
     });
     setclients(updatedClient)
   }
+   const handleEdit = (index) => {
+   setformData(clients[index]);   
+   setEditingIndex(index);  
+  } 
 
   return (
     <>
@@ -126,6 +104,7 @@ const handleSubmit = (e) => {
             handleSubmit(e);
           }}
         >
+          <div className="field"> 
           <div className="clientcell">
             <label>Client ID : </label>
             <input
@@ -137,8 +116,13 @@ const handleSubmit = (e) => {
               onChange={handlechange}
             />
           </div>
+          <div className="error-text">
+           {errors.clientID ? errors.clientID : ""}
+          </div>
+          </div>
+          <div className="field">
           <div className="clientcell">
-            <label htmlFor="">Client Name : </label>
+            <label>Client Name : </label>
             <input
               type="text"
               name="clientName"
@@ -148,8 +132,13 @@ const handleSubmit = (e) => {
               onChange={handlechange}
             />
           </div>
+          <div className="error-text">
+            {errors.clientName ? errors.clientName : ""}
+          </div>
+          </div>
+          <div className="field"> 
           <div className="clientcell">
-            <label htmlFor="">Client Age : </label>
+            <label>Client Age : </label>
             <input
               type="text"
               name="clientAge"
@@ -159,7 +148,12 @@ const handleSubmit = (e) => {
               onChange={handlechange}
             />
           </div>
-
+          <div className="error-text">
+           {errors.clientAge ? errors.clientAge : ""}
+          </div>
+    
+          </div>
+          <div className="field"> 
           <div className="clientcell">
             <label htmlFor="">Client Address : </label>
             <input
@@ -171,7 +165,10 @@ const handleSubmit = (e) => {
               onChange={handlechange}
             />
           </div>
-          {error && <p style={{color: "red", fontWeight: 600}}>{error}</p>}
+          <div className="error-text">
+           {errors.clientAddress ? errors.clientAddress : ""}
+          </div>
+          </div>
           <button className="btn" type="submit">
             Submit
           </button>
@@ -181,3 +178,4 @@ const handleSubmit = (e) => {
     </>
   );
 }
+

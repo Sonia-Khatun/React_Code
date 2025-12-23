@@ -10,8 +10,8 @@ export default function ClientChild(props) {
   ) :  (
     <table border="1" cellPadding="10"> 
     <thead>
-      <tr>
-        <th>Client_ID</th>
+      <tr> 
+        <th>Client_ID</th> 
         <th>Client_Name</th>
         <th>Client_Age</th>
         <th>Client_Address</th>

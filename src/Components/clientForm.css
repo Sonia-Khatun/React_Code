@@ -4,9 +4,14 @@
   padding: 0;
 }
 
+.field {
+  margin-bottom: 0; 
+}
+
+
 
 .C-form {
-  width: 420px;
+  width: 400px;
   margin: 60px auto;
   padding: 20px;
   background-color: rgb(14, 192, 133);
@@ -32,7 +37,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 40px;  
 }
+
 
 .clientcell label {
   font-weight: 600;
@@ -41,11 +48,12 @@
 
 .client-form input {
   width: 220px;
-  height: 38px;
-  padding: 6px;
+  height: 40px;
+  padding: 8px;
   border: 2px solid white;
   border-radius: 5px;
   outline: none;
+  box-sizing: border-box;
 }
 
 
@@ -94,3 +102,14 @@ table button {
   font-size: 22px;
   font-weight: 600;
 }
+.error-text {
+  height: 14px;
+  line-height: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(241, 21, 21);
+  padding-left: 140px;
+}
+
+
+
