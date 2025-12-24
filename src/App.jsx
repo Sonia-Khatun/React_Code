@@ -6,6 +6,8 @@ import DefaultProp from './Components/DefaultProp';
 import ControlledIn from './Components/ControlledIn';
 import EventComp from './Components/EventComp';
 import ClientForm from './Components/ClientForm';
+import UseEffects from './Components/UseEffects'
+import UseRef from './Components/UseRef';
 
 export default function App() {
   return (
@@ -15,7 +17,9 @@ export default function App() {
       {/* <DefaultProp /> */}
       {/* <ControlledIn /> */}
       {/* <EventComp /> */}
-      <ClientForm />
+      {/* <ClientForm /> */}
+      {/* <UseEffects /> */}
+      <UseRef />
     </div>
   )
 }

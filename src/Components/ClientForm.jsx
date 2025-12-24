@@ -32,7 +32,7 @@ export default function ClientForm() {
     if(!regex.test(value)){
       newError.clientName = "Name should contain Character"
     }else{
-      delete newError.clientName
+      delete newError.clientName 
     }
    } 
  
