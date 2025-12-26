@@ -1,0 +1,101 @@
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #b0cce9;
+}
+
+
+.heading {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-top: 20px;
+  color: #0e0202;
+  gap: 80px;
+}
+
+
+form {
+  width: 380px;
+  margin: 40px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #080101c4;
+}
+
+
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #afa8a8;
+  font-size: 14px;
+  
+}
+
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #107a56;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+
+.btn:hover {
+  background-color: #22a479;
+}
+.btn1{
+  width: 80px;
+  padding: 10px;
+  background-color: rgb(245, 230, 230);
+  color: #110f0fd1;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  
+}
+.pass-Word{
+    display: flex;
+}
+
+.pass-Word {
+  position: relative;      
+  width: 100%;
+}
+
+.pass-Word input {
+  width: 100%;
+  padding-right: 140px;     
+  height: 38px;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 10px;             
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}

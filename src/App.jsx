@@ -8,6 +8,9 @@ import EventComp from './Components/EventComp';
 import ClientForm from './Components/ClientForm';
 import UseEffects from './Components/UseEffects'
 import UseRef from './Components/UseRef';
+import USecallBack from './Components/USecallBack';
+import Register from './Components/RegistrantionPage/Register';
+
 
 export default function App() {
   return (
@@ -19,7 +22,9 @@ export default function App() {
       {/* <EventComp /> */}
       {/* <ClientForm /> */}
       {/* <UseEffects /> */}
-      <UseRef />
+      {/* <UseRef /> */}
+      {/* <USecallBack /> */}
+      <Register />
     </div>
   )
 }
