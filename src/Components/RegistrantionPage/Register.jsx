@@ -18,7 +18,8 @@ export default function Register() {
 
   const [activeform, setactiveform] = useState("register");
 
-  const [showPassword, setshowPassword] = useState();
+  const [showPassword, setshowPassword] = useState(false);
+  const [showRegisterPassword, setShowRegisterPassword] = useState(false);
 
   const handleChange = (e) => {
     console.log(e.target.name, e.target.value);
@@ -41,48 +42,40 @@ export default function Register() {
     });
   };
 
-   const loginChange = (e) =>{
-   console.log(e.target.name, e.target.value);
+  const loginChange = (e) => {
+    console.log(e.target.name, e.target.value);
 
-   const {name, value} = e.target
+    const { name, value } = e.target;
 
-   setloginForm({
-    ...loginForm,
-    [name]:value
-   })
-  }
+    setloginForm({
+      ...loginForm,
+      [name]: value,
+    });
+  };
 
   const loginSubmit = (e) => {
-   e.preventDefault();
-    
-   setloginForm({
-    userID:"",
-    password: ""
-   })
-  }
+    e.preventDefault();
+
+    setloginForm({
+      userID: "",
+      password: "",
+    });
+  };
 
   return (
     <>
-      <div className="heading">
-        <button
-          onClick={() => {
-            setactiveform("register");
-          }}
-          className="btn1"
-        >
-          Register
-        </button>
-        <button
-          onClick={() => {
-            setactiveform("login");
-          }}
-          className="btn1"
-        >
-          Login
-        </button>
-      </div>
       {activeform === "register" && (
         <form onSubmit={(e) => handleSubmit(e)}>
+          <div className="heading">
+            <button
+              onClick={() => {
+                setactiveform("login");
+              }}
+              className="btn1"
+            >
+              Login
+            </button>
+          </div>
           <div>
             <label>Name : </label>
             <input
@@ -116,24 +109,47 @@ export default function Register() {
               onChange={handleChange}
             />
           </div>
-          <div>
-            <label>Password : </label>
-            <input
-              type="password"
-              name="password"
-              placeholder="Enter Your Password"
-              required
-              value={formData.password}
-              onChange={handleChange}
-            />
+          <div className="pass-Word">
+            <div>
+              <label>Password : </label>
+              <input
+                type={showRegisterPassword ? "text" : "password"}
+                name="password"
+                placeholder="Enter Your Password"
+                required
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </div>
+
+            <button
+              type="button"
+              className="eye-btn"
+              onClick={() => setShowRegisterPassword(!showRegisterPassword)}
+            >
+              {showRegisterPassword ? <IoEyeOff /> : <IoEye />}
+            </button>
           </div>
+
           <button className="btn">Register</button>
         </form>
       )}
       {activeform === "login" && (
-        <form onSubmit={(e) => {loginSubmit(e)}}>
+        <form
+          onSubmit={(e) => {
+            loginSubmit(e);
+          }}
+        >
+          <button
+            onClick={() => {
+              setactiveform("register");
+            }}
+            className="btn2"
+          >
+            Register
+          </button>
           <div>
-            <label>Enter Your UserID: </label>
+            <label>Enter UserID: </label>
             <input
               type="text"
               name="userID"
@@ -144,7 +160,7 @@ export default function Register() {
           </div>
 
           <div className="pass-Word">
-              <div>
+            <div>
               <label>Enter Password: </label>
               <input
                 type={showPassword ? "text" : "password"}
@@ -154,12 +170,14 @@ export default function Register() {
                 value={loginForm.password}
                 onChange={loginChange}
               />
-           
-           </div>
-              <button className="eye-btn" onClick={() => setshowPassword(!showPassword)}>
-                {showPassword ? <IoEyeOff /> : <IoEye />}
-              </button>
-            
+            </div>
+            <button
+              type="button"
+              className="eye-btn"
+              onClick={() => setshowPassword(!showPassword)}
+            >
+              {showPassword ? <IoEyeOff /> : <IoEye />}
+            </button>
           </div>
           <button className="btn">Login</button>
         </form>
