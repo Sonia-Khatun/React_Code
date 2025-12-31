@@ -21,6 +21,8 @@ export default function Register() {
   const [showPassword, setshowPassword] = useState(false);
   const [showRegisterPassword, setShowRegisterPassword] = useState(false);
 
+  const [loading, setLoading] = useState(false)
+
   const handleChange = (e) => {
     console.log(e.target.name, e.target.value);
     const { name, value } = e.target;
@@ -31,15 +33,45 @@ export default function Register() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setformData({
+   try{
+
+    setLoading(true)
+
+    const response = await fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers : {
+        "Content-Type": "application/json"
+      },
+      body : JSON.stringify(formData)
+
+    });
+    console.log(response);
+    
+    if(!response.ok){
+      throw new Error("Registration Failed")
+    }
+    
+    alert("Registration Successful")
+
+      setformData({
       name: "",
       email: "",
       mobile: "",
       password: "",
     });
+  }
+
+    catch(error){
+      alert(error.message)
+    } 
+    // finally{
+    //   setLoading(false)
+    // }
+
+    
   };
 
   const loginChange = (e) => {
@@ -53,14 +85,35 @@ export default function Register() {
     });
   };
 
-  const loginSubmit = (e) => {
+  const loginSubmit = async (e) => {
     e.preventDefault();
+  try {
+  const res = await fetch("http://localhost:3000/users");
+  
+  if(!res.ok){
+    throw new Error("Server Error");
+  }
 
-    setloginForm({
+  const users = await res.json();
+
+  const user = users.find((u) =>
+   (u.name === loginForm.userID && u.password === loginForm.password))
+  
+  if(user){
+    alert("Loggedin Successfully");
+  }else{
+    alert("Invalid User");
+  }
+
+   setloginForm({
       userID: "",
-      password: "",
+      password: "", 
     });
-  };
+
+  } catch(error){
+    alert(error.message)
+  }
+ };
 
   return (
     <>
@@ -153,7 +206,7 @@ export default function Register() {
             <input
               type="text"
               name="userID"
-              placeholder="Enter email or Phone no"
+              placeholder="Enter Your UserName"
               value={loginForm.userID}
               onChange={loginChange}
             />
