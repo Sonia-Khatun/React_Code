@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./clientForm.css";
+import "./clientForm.css"
+import { useNavigate } from "react-router-dom"
 import ClientChild from "./ClientChild";
 
 export default function ClientForm() {
@@ -13,6 +14,7 @@ export default function ClientForm() {
   const [editingIndex, setEditingIndex] = useState(null);
 
   const [errors, setErrors] = useState({})
+  const navigate = useNavigate();
 
   const handlechange = (e) => {
     // console.log(e.target.name, e.target.value);
@@ -81,6 +83,10 @@ export default function ClientForm() {
   });
 };
 
+  const handleLogout = () =>{
+    navigate("/register")
+  }
+
  
   const handleRemove =(indexToRemove) => {
     const updatedClient = clients.filter((_, index) => {
@@ -96,8 +102,14 @@ export default function ClientForm() {
   return (
     <>
       <div className="C-form">
-        <h3 className="client-header">Client Details</h3>
-
+        <div className="clientForm-header">
+          <h3 className="client-header">Client Details</h3>
+          <button onClick={handleLogout}
+          className="header-btn">
+          Logout
+          </button>
+        </div>
+       
         <form
           className="client-form"
           onSubmit={(e) => {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 
 import "./register.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [formData, setformData] = useState({
@@ -20,6 +21,7 @@ export default function Register() {
 
   const [showPassword, setshowPassword] = useState(false);
   const [showRegisterPassword, setShowRegisterPassword] = useState(false);
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false)
 
@@ -101,6 +103,7 @@ export default function Register() {
   
   if(user){
     alert("Loggedin Successfully");
+    navigate("/clientForm")
   }else{
     alert("Invalid User");
   }
@@ -118,7 +121,7 @@ export default function Register() {
   return (
     <>
       {activeform === "register" && (
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form className="register-form" onSubmit={(e) => handleSubmit(e)}>
           <div className="heading">
             <button
               onClick={() => {
@@ -184,11 +187,11 @@ export default function Register() {
             </button>
           </div>
 
-          <button className="btn">Register</button>
+          <button className="register-btn">Register</button>
         </form>
       )}
       {activeform === "login" && (
-        <form
+        <form className="login-form"
           onSubmit={(e) => {
             loginSubmit(e);
           }}
@@ -200,7 +203,7 @@ export default function Register() {
             className="btn2"
           >
             Register
-          </button>
+          </button>  
           <div>
             <label>Enter UserID: </label>
             <input
@@ -232,7 +235,7 @@ export default function Register() {
               {showPassword ? <IoEyeOff /> : <IoEye />}
             </button>
           </div>
-          <button className="btn">Login</button>
+          <button className="register-btn">Login</button>
         </form>
       )}
     </>

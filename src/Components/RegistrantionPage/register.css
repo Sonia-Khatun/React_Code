@@ -5,7 +5,7 @@ body {
 }
 
 
-.heading {
+.register-form heading {
   display: flex;
   text-align: center;
   justify-content: center;
@@ -15,7 +15,15 @@ body {
 }
 
 
-form {
+.register-form {
+  width: 380px;
+  margin: 40px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.login-form{
   width: 380px;
   margin: 40px auto;
   padding: 25px;
@@ -24,10 +32,12 @@ form {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-form div {
+.register-form div {
   margin-bottom: 15px;
 }
-
+.login-form div{
+  margin-bottom: 15px;
+}
 label {
   display: block;
   margin-bottom: 6px;
@@ -46,7 +56,7 @@ input {
 }
 
 
-.btn {
+.register-btn {
   width: 100%;
   padding: 10px;
   background-color: #107a56;
@@ -59,7 +69,7 @@ input {
 }
 
 
-.btn:hover {
+.register-btn:hover {
   background-color: #22a479;
 }
 .btn1{ 
