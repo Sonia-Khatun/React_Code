@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./clientForm.css"
 import { useNavigate } from "react-router-dom"
 import ClientChild from "./ClientChild";
@@ -13,6 +13,7 @@ export default function ClientForm() {
   const [clients, setclients] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
 
+  
   const [errors, setErrors] = useState({})
   const navigate = useNavigate();
 
@@ -54,28 +55,67 @@ export default function ClientForm() {
   setErrors(newError);
 };
 
-  const handleSubmit = (e) => {
-  e.preventDefault();
+ const loggedUser = JSON.parse(sessionStorage.getItem("loggedInUser"));
+ const loggedUserName = loggedUser?.name
 
+ const fetchTableData = async () =>{
+   await fetch(`http://localhost:3000/clients?createdBy=${loggedUserName}`)
+    .then(res => res.json())
+    .then(data => setclients(data));
 
-  if (editingIndex === null) {
-    // New Client
-    setclients([...clients, formData]);
-  } else {
-    // Edit client
-    const updatedClients = clients.map((client, index) => {
-      if (index === editingIndex) {
-        return formData;   
-      }
-      return client;
-    });
-    setclients(updatedClients);
-    setEditingIndex(null);
+ }
+
+ useEffect(() => {
+   if (!loggedUserName) {
+    navigate("/register");
+    
+    return;
   }
 
+ fetchTableData();
+   
+}, [loggedUserName]);
 
 
-  setformData({
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+    const clientData = {
+    clientID : formData.clientID,
+    clientName: formData.clientName,
+    clientAge : formData.clientAge,
+    clientAddress : formData.clientAddress,
+    createdBy : loggedUser.name
+  }
+
+  try{
+
+  const response = await fetch("http://localhost:3000/clients", {
+      method: "POST",
+      headers : {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(clientData)
+
+    });
+    console.log(response);
+
+    if(response?.status === 201){
+      fetchTableData();
+    }
+
+
+    
+
+   alert("Client Data saved Successfully")
+   }catch(error){
+   alert("Failed to save")
+   }
+   
+   const savedClient = await response.json();
+   setclients([...clients, savedClient])
+
+   setformData({
     clientID: "",
     clientName: "",
     clientAge: "",
@@ -84,16 +124,23 @@ export default function ClientForm() {
 };
 
   const handleLogout = () =>{
+    sessionStorage.removeItem("loggedInUser");
     navigate("/register")
   }
 
- 
-  const handleRemove =(indexToRemove) => {
-    const updatedClient = clients.filter((_, index) => {
-      return index !== indexToRemove;
+
+  const handleRemove = async (id) =>{
+    try{
+      await fetch(`http://localhost:3000/clients/${id}`,{
+      method: "Delete"
     });
-    setclients(updatedClient)
-  }
+    setclients(clients.filter(client => client.id !== id))
+    } catch(error){
+     alert("Failed to delete client");
+    }
+  };
+  
+
    const handleEdit = (index) => {
    setformData(clients[index]);   
    setEditingIndex(index);  

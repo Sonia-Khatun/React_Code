@@ -20,7 +20,7 @@ export default function ClientChild(props) {
     </thead>
     <tbody>
       {clientDet.map((client, index)=>(
-        <tr key={client.clientID}>
+        <tr key={client.id}>
 
           <td>{client.clientID}</td>
           <td>{client.clientName}</td>

@@ -103,6 +103,12 @@ export default function Register() {
   
   if(user){
     alert("Loggedin Successfully");
+    sessionStorage.setItem(
+   "loggedInUser",
+    JSON.stringify({
+    name: user.name   
+  })
+);
     navigate("/clientForm")
   }else{
     alert("Invalid User");

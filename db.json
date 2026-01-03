@@ -63,5 +63,63 @@
       "mobile": "5467",
       "password": "6yu4yh"
     }
+  ],
+  "clients": [
+    {
+      "id": "23f6",
+      "clientID": "sonia123",
+      "clientName": "sonia",
+      "clientAge": "90",
+      "clientAddress": "kolkata",
+      "createdBy": "sonia"
+    },
+    {
+      "id": "c8b7",
+      "clientID": "F4",
+      "clientName": "Fff",
+      "clientAge": "80",
+      "clientAddress": "Med",
+      "createdBy": "sonia"
+    },
+    {
+      "id": "0356",
+      "clientID": "F4",
+      "clientName": "Fff",
+      "clientAge": "80",
+      "clientAddress": "Med",
+      "createdBy": "sonia"
+    },
+    {
+      "id": "92d8",
+      "clientID": "F4",
+      "clientName": "Fff",
+      "clientAge": "80",
+      "clientAddress": "Med",
+      "createdBy": "sonia"
+    },
+    {
+      "id": "42d6",
+      "clientID": "fdhgh",
+      "clientName": "ghjj",
+      "clientAge": "78",
+      "clientAddress": "Med",
+      "createdBy": "sonia"
+    },
+    {
+      "id": "d57e",
+      "clientID": "sonia12",
+      "clientName": "ww",
+      "clientAge": "90",
+      "clientAddress": "dsd",
+      "createdBy": "sonia"
+    },
+    {
+      "id": "4a1a",
+      "clientID": "h",
+      "clientName": "Sonia",
+      "clientAge": "90",
+      "clientAddress": "dsd",
+      "createdBy": "sonia"
+    }
   ]
 }
