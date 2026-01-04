@@ -10,7 +10,7 @@ export default function Register() {
     email: "",
     mobile: "",
     password: "",
-  });
+  }); 
 
   const [loginForm, setloginForm] = useState({
     userID: "",

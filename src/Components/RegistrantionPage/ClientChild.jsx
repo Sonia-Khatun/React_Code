@@ -28,7 +28,7 @@ export default function ClientChild(props) {
           <td>{client.clientAddress}</td>
           <td>
             <button className='btn'onClick={()=> editData(index)}>Edit</button>
-            <button className='btn' onClick={()=> removeRow(index)}>Remove</button>
+            <button className='btn' onClick={()=> removeRow(client.id)}>Remove</button>
           </td>
         </tr>
       ))}
