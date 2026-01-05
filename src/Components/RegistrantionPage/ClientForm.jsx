@@ -65,9 +65,10 @@ export default function ClientForm() {
       createdBy: loggedUser.name,
     };
     try {
+      let response;
       if (editingIndex !== null) {
         const id = clients[editingIndex].id;
-        let response = await fetch(`http://localhost:3000/clients/${id}`, {
+        response = await fetch(`http://localhost:3000/clients/${id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",

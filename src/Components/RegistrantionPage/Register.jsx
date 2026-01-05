@@ -69,11 +69,6 @@ export default function Register() {
     catch(error){
       alert(error.message)
     } 
-    // finally{
-    //   setLoading(false)
-    // }
-
-    
   };
 
   const loginChange = (e) => {
